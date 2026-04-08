@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Birthday Greeting</title>
+  <style>
+    :root {
+      --bg1: #e2e8f0;
+      --bg2: #f3f4f6;
+      --bg3: #c7d2fe;
+      --text-main: #374151;
+      --card-bg: rgba(255, 255, 255, 0.72);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text-main);
+      overflow: hidden;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+    }
+
+    .page {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .intro {
+      text-align: center;
+      animation: fadeInScale 500ms ease-out both;
+    }
+
+    .intro-gift {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      animation: wobble 2.5s infinite ease-in-out;
+    }
+
+    .intro-title {
+      font-size: 1.5rem;
+      margin: 0 0 1rem;
+    }
+
+    .open-btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.8rem 2rem;
+      background: linear-gradient(90deg, #f472b6, #fb7185);
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(244, 114, 182, 0.35);
+      transition: transform 180ms ease;
+    }
+
+    .open-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .celebration {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .celebration.show {
+      display: flex;
+    }
+
+    .party-emoji {
+      position: absolute;
+      top: 2.5rem;
+      left: 2.5rem;
+      font-size: 3rem;
+      animation: partyFloat 3s infinite ease-in-out;
+      user-select: none;
+    }
+
+    .bouquet {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      font-size: 5rem;
+      user-select: none;
+      animation: bouquetPop 1.2s ease both;
+    }
+
+    .bouquet > span {
+      display: inline-block;
+      animation: bouquetBob 2s infinite ease-in-out;
+    }
+
+    .big-gift {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      animation: giftPop 700ms cubic-bezier(0.2, 1, 0.3, 1) both;
+    }
+
+    .letter {
+      max-width: 820px;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      background: var(--card-bg);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      animation: fadeInUp 700ms 350ms ease both;
+    }
+
+    .letter h1 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      color: #1f2937;
+    }
+
+    .letter p {
+      margin: 0;
+      line-height: 1.7;
+      font-size: 1.075rem;
+      color: #374151;
+    }
+
+    .letter .sign {
+      margin-top: 1rem;
+      color: #6b7280;
+      font-size: 0.98rem;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 12px;
+      border-radius: 2px;
+      top: -20px;
+      pointer-events: none;
+      will-change: transform;
+      animation-name: fall;
+      animation-timing-function: ease-out;
+      animation-fill-mode: both;
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes wobble {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-3deg); }
+      50% { transform: rotate(3deg); }
+      75% { transform: rotate(-3deg); }
+    }
+
+    @keyframes partyFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      33% { transform: translateY(-10px) rotate(10deg); }
+      66% { transform: translateY(0) rotate(-10deg); }
+    }
+
+    @keyframes bouquetPop {
+      from {
+        transform: translate(150px, 150px);
+        opacity: 0;
+      }
+      to {
+        transform: translate(0, 0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes bouquetBob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes giftPop {
+      from { transform: scale(0); }
+      to { transform: scale(1); }
+    }
+
+    @keyframes fall {
+      to {
+        transform: translate(var(--drift), 110vh) rotate(var(--spin));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .party-emoji {
+        font-size: 2.2rem;
+        left: 1rem;
+        top: 1rem;
+      }
+      .bouquet {
+        font-size: 3.5rem;
+      }
+      .letter {
+        padding: 1.1rem;
+      }
+      .letter p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="intro" id="intro">
+      <div class="intro-gift">🎁</div>
+      <h1 class="intro-title">Невеликий знак уваги для Вас</h1>
+      <button id="openBtn" class="open-btn">Відкрити ✨</button>
+    </section>
+
+    <section class="celebration" id="celebration">
+      <div class="party-emoji">🥳🎉</div>
+      <div class="bouquet"><span>💐</span></div>
+
+      <div>
+        <div class="big-gift">🎁</div>
+        <article class="letter">
+          <h1>З Днем Народження, Наталю! 🌸</h1>
+          <p>
+            Шановна Наталю!<br /><br />
+            Щиро вітаємо Вас з Днем народження 🌷<br />
+            Нехай кожен день приносить радість, гармонію та натхнення,<br />
+            а у серці завжди панують тепло і спокій.<br /><br />
+            Бажаємо міцного здоров'я, легкості у справах та приємних моментів у житті.<br />
+            Нехай поруч будуть щирі люди, а всі задуми легко втілюються в реальність ✨
+          </p>
+          <p class="sign">З найкращими побажаннями та повагою 💌</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const intro = document.getElementById("intro");
+    const celebration = document.getElementById("celebration");
+    const openBtn = document.getElementById("openBtn");
+    const colors = ["#ff006e", "#ffbe0b", "#3a86ff", "#8338ec", "#06d6a0"];
+
+    function createConfettiPiece() {
+      const el = document.createElement("div");
+      el.className = "confetti";
+      const x = Math.random() * 100;
+      const delay = Math.random() * 2;
+      const duration = 3 + Math.random() * 2;
+      const rotate = Math.random() * 360;
+      const drift = Math.random() * 80 - 40;
+
+      el.style.left = `${x}%`;
+      el.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      el.style.animationDelay = `${delay}s`;
+      el.style.animationDuration = `${duration}s`;
+      el.style.transform = `translateY(-50px) rotate(${rotate}deg)`;
+      el.style.setProperty("--drift", `${drift}px`);
+      el.style.setProperty("--spin", `${rotate + 360}deg`);
+      return el;
+    }
+
+    openBtn.addEventListener("click", () => {
+      intro.style.display = "none";
+      celebration.classList.add("show");
+
+      for (let i = 0; i < 120; i++) {
+        celebration.appendChild(createConfettiPiece());
+      }
+    });
+  </script>
+</body>
+</html>
