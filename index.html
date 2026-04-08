@@ -93,21 +93,25 @@
     }
 
     .party-emoji {
-      position: absolute;
+      position: fixed;
       top: 2.5rem;
       left: 2.5rem;
       font-size: 3rem;
       animation: partyFloat 3s infinite ease-in-out;
       user-select: none;
+      z-index: 3;
+      pointer-events: none;
     }
 
     .bouquet {
-      position: absolute;
+      position: fixed;
       bottom: 1rem;
       right: 1rem;
       font-size: 5rem;
       user-select: none;
       animation: bouquetPop 1.2s ease both;
+      z-index: 3;
+      pointer-events: none;
     }
 
     .bouquet > span {
@@ -330,7 +334,7 @@
   <main class="page">
     <section class="intro" id="intro">
       <div class="intro-gift">🎁</div>
-      <h1 class="intro-title">Невеликий знак уваги для Вас</h1>
+      <h1 class="intro-title">Невеликий знак уваги для тебе ✨</h1>
       <button id="openBtn" class="open-btn">Відкрити ✨</button>
     </section>
 
