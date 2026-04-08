@@ -133,8 +133,8 @@
 
     .photo-wrap {
       position: relative;
-      width: min(100%, 520px);
-      margin: 0 auto 1rem;
+      width: min(100%, 320px);
+      margin: 1rem auto 0;
       border-radius: 1rem;
       overflow: hidden;
       box-shadow: 0 12px 34px rgba(31, 41, 55, 0.2);
@@ -250,7 +250,7 @@
 
     @keyframes fall {
       to {
-        transform: translate(var(--drift), 110vh) rotate(var(--spin));
+        transform: translate(var(--drift), var(--fall-distance, 110svh)) rotate(var(--spin));
       }
     }
 
@@ -306,7 +306,8 @@
         font-size: 3rem;
       }
       .photo-wrap {
-        margin-bottom: 0.85rem;
+        width: min(100%, 250px);
+        margin-top: 0.85rem;
         border-radius: 0.85rem;
       }
     }
@@ -340,9 +341,6 @@
       <div>
         <div class="big-gift">🎁</div>
         <article class="letter">
-          <div class="photo-wrap">
-            <img class="photo" src="./img.jpg" alt="Святкове фото" loading="lazy" decoding="async" />
-          </div>
           <h1>З Днем Народження, Наталю! 🌸</h1>
           <p>
             Наталю, щиро вітаю тебе з Днем народження! 🌷<br /><br />
@@ -351,6 +349,9 @@
             Нехай поруч будуть щирі люди, які підтримують і надихають, а в серці завжди буде світло і затишно.<br /><br />
             Нехай твої мрії здійснюються м'яко й природно, приносячи тобі задоволення та усмішку. ✨
           </p>
+          <div class="photo-wrap">
+            <img class="photo" src="./img.jpg" alt="Святкове фото" loading="lazy" decoding="async" />
+          </div>
           <p class="sign">З найтеплішими побажаннями 💌</p>
         </article>
       </div>
@@ -362,6 +363,11 @@
     const celebration = document.getElementById("celebration");
     const openBtn = document.getElementById("openBtn");
     const colors = ["#ff006e", "#ffbe0b", "#3a86ff", "#8338ec", "#06d6a0"];
+
+    function getFallDistance() {
+      const contentHeight = Math.max(celebration.scrollHeight, window.innerHeight);
+      return `${contentHeight + 120}px`;
+    }
 
     function createConfettiPiece() {
       const el = document.createElement("div");
@@ -379,6 +385,7 @@
       el.style.transform = `translateY(-50px) rotate(${rotate}deg)`;
       el.style.setProperty("--drift", `${drift}px`);
       el.style.setProperty("--spin", `${rotate + 360}deg`);
+      el.style.setProperty("--fall-distance", getFallDistance());
       return el;
     }
 
