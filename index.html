@@ -254,7 +254,7 @@
 
     @keyframes fall {
       to {
-        transform: translate(var(--drift), var(--fall-distance, 110svh)) rotate(var(--spin));
+        transform: translate(var(--drift), var(--fall-distance, 160svh)) rotate(var(--spin));
       }
     }
 
@@ -287,12 +287,12 @@
         padding-top: 4rem;
       }
       .party-emoji {
-        font-size: 2.2rem;
+        font-size: 3rem;
         left: 1rem;
         top: 1rem;
       }
       .bouquet {
-        font-size: 3rem;
+        font-size: 4.2rem;
         right: 0.5rem;
         bottom: 0.5rem;
       }
@@ -318,7 +318,10 @@
 
     @media (max-width: 430px) {
       .party-emoji {
-        font-size: 1.8rem;
+        font-size: 2.6rem;
+      }
+      .bouquet {
+        font-size: 3.6rem;
       }
       .letter h1 {
         font-size: 1.45rem;
@@ -369,8 +372,12 @@
     const colors = ["#ff006e", "#ffbe0b", "#3a86ff", "#8338ec", "#06d6a0"];
 
     function getFallDistance() {
-      const contentHeight = Math.max(celebration.scrollHeight, window.innerHeight);
-      return `${contentHeight + 120}px`;
+      const contentHeight = Math.max(
+        celebration.scrollHeight,
+        document.documentElement.scrollHeight,
+        window.innerHeight
+      );
+      return `${contentHeight + 320}px`;
     }
 
     function createConfettiPiece() {
